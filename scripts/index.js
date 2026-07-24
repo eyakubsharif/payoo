@@ -13,10 +13,15 @@ document.getElementById('loginBtn').addEventListener('click',function(e){
     const mobileNumber =getValue('number');
     const pinNumber = getValue('pin')
 console.log(number,pin,mobileNumber)
-    if(mobileNumber == number && pinNumber == pin){
-        window.location.href ="home.html"
-    }else{
-      const errorMessage = document.getElementById('error');
-    errorMessage.innerText = 'Please give valid input';
+        if(mobileNumber == number && pinNumber == pin){
+            window.location.href ="home.html"
+        }else{
+        const errorMessage = document.getElementById('error');
+   
+        errorMessage.innerText = 'Please give valid input';
+    
+        setTimeout(() => {
+             errorMessage.innerText = '';
+        }, 1000);
     }
 })
