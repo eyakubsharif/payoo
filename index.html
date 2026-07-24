@@ -15,9 +15,22 @@
     <!-- link style.css file -->
     <link rel="stylesheet" href="styles/style.css">
 </head>
-<body>
-    
-
+<body class="h-[100vh] flex flex-col justify-center items-center bg-gray-200 ">
+    <div class="bg-[url(./assets/bg.png)] w-[360px] h-[130px] bg-cover">
+        <img class="mx-auto mt-5" src="assets/Group.png" alt="">
+    </div>
+    <form class="bg-white py-10 px-6 rounded-xl space-y-2" >
+          <div>
+                 <label class="font-bold">Mobile Number</label>   
+                  <input id="number" class="input bg-gray-200 border-none rounded-full" type="text" placeholder="Enter your number">  
+          </div>
+          <div>
+                 <label class="font-bold">4 Digit Pin</label>   
+                  <input id="pin" class="input bg-gray-200 border-none rounded-full" type="text" placeholder="Enter 4 Digit Pin">  
+          </div>
+           <input id="loginBtn" class="btn btn-primary rounded-full w-full " type="button" value="Login"> 
+           <p class="text-red-500" id="error"></p>
+    </form>
 
 
 
