@@ -22,11 +22,11 @@
         <div class="flex items-center">
             <img class="w-10" src="assets/Group.png" alt="">
             <div>
-                <h1 class="font-bold text-xl">$ <span>5000</span></h1>
+                <h1 class="font-bold text-xl">$ <span id="main-balance">5000</span></h1>
                 <p class="text-gray-400">Available Balance</p>
             </div>
         </div>
-        <button class="btn btn-md"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
+        <button id="logout-btn" class="btn btn-md"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
     </header>
 
     <div class="py-5 px-5 bg-white">
@@ -64,7 +64,7 @@
 <div id="addmoney-form" class="form">
     <h1 class="my-4 font-bold">Add Money</h1>
     <form class="bg-white px-5 py-3 space-y-3 rounded-xl shadow-sm">
-        <select class="select text-black">
+        <select id="bank" class="select text-black">
         <option disabled selected>Select Bank</option>
         <option>AB Bank</option>
         <option>IFIC Bank</option>
@@ -73,17 +73,18 @@
                 
         <div>
              <label class="label text-black" for="name">Bank account number</label> <br>
-            <input type="text" id="name" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Enter 11 digit account number" />
+            <input  type="text" id="number" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Enter 11 digit account number" />
         </div>
         <div>
              <label class="label text-black" for="name">Amount to add</label> <br>
-            <input type="text" id="name" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Add amount" />
+            <input type="text" id="amount" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Add amount" />
         </div>
          <div>
              <label class="label text-black" for="name">Pin Number</label> <br>
-            <input type="text" id="name" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Enter 4 digit pin number" />
+            <input type="text" id="pin" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Enter 4 digit pin number" />
         </div>
-        <button class="btn btn-primary w-[80%] text-white rounded-full">Add Money</button>
+        <p id="error"></p>
+        <button type="button" id="addMoneyBtn" class="btn btn-primary w-[80%] text-white rounded-full">Add Money</button>
     </form>
 </div>
 
@@ -98,13 +99,14 @@
         </div>
         <div>
              <label class="label text-black" for="name">Amount </label> <br>
-            <input type="text" id="name" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Add amount" />
+            <input type="text" id="cashout-amount" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Add amount" />
         </div>
          <div>
              <label class="label text-black" for="name">Pin Number</label> <br>
-            <input type="text" id="name" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Enter 4 digit pin number" />
+            <input type="text" id="cashout-pin" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Enter 4 digit pin number" />
         </div>
-        <button class="btn btn-primary w-[80%] text-white rounded-full">Cashout</button>
+         <p id="cashoutError"></p>
+        <button id="cashout-btn" type="button" class="btn btn-primary w-[80%] text-white rounded-full">Cashout</button>
     </form>
 </div>
 
@@ -119,13 +121,14 @@
         </div>
         <div>
              <label class="label text-black" for="name">Amount </label> <br>
-            <input type="text" id="name" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Write amount to transfer" />
+            <input type="number" id="transferAmount" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Write amount to transfer" />
         </div>
          <div>
              <label class="label text-black" for="name">Pin Number</label> <br>
-            <input type="text" id="name" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Enter 4 digit pin number" />
+            <input type="password" id="transferPin" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Enter 4 digit pin number" />
         </div>
-        <button class="btn btn-primary w-[80%] text-white rounded-full">Send Money</button>
+         <p id="transferError" class="text-red-500"></p>
+        <button id="transfer-btn" class="btn btn-primary w-[80%] text-white rounded-full">Send Money</button>
     </form>
 </div>
 <!-- Bonus form -->
@@ -137,7 +140,7 @@
              <label class="label text-black" for="name">Enter Bonus Coupon</label> <br>
             <input type="text" id="name" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Enter 11 digit account number" />
         </div>
-        
+        <p id="bonusError"></p>
         <button class="btn btn-primary w-[80%] text-white rounded-full">Get Bonus</button>
     </form>
 </div>
@@ -164,19 +167,36 @@
              <label class="label text-black" for="name">Pin Number</label> <br>
             <input type="text" id="name" class="input bg-gray-200 rounded-full border-none ml-2" placeholder="Enter 4 digit pin number" />
         </div>
+        <p id="paybillError"></p>
         <button class="btn btn-primary w-[80%] text-white rounded-full">Pay Now</button>
     </form>
 </div>
 
-<!-- pay bill form -->
+<!-- transaction form -->
 <div id="transaction-form" class="hidden form">
     <div class="flex justify-between items-center">
         <h1 class="my-4 font-bold ">Transaction History</h1>
         <p>View All</p>
     </div>
+    <div id="container" class="">
+        <div class="flex items-center justify-between px-5 py-5 shadow-md rounded-xl bg-white">
+        <div class="flex gap-5 items-center">
+        <img class="w-10" src="assets/addmoney.png" alt="">
+        <div>
+            <p class="font-bold text-sm">Add Money</p>
+            <p class="text-sm">Amount : 2000</p>
+            <p class="text-xs">10:12 AM</p>
+        </div>
+       
+    </div>
+     <i class="fa-solid fa-ellipsis rotate-90"></i>
+
+    </div>
+    </div>
     
 </div>
 
+    
 </div>
 
 
